@@ -1,12 +1,12 @@
 /*
-PROYECTO SQL ñ PIRINEO ECUESTRE
+PROYECTO SQL ‚Äì PIRINEO ECUESTRE
 Objetivo: modelar y analizar un sistema de reservas para una empresa de turismo ecuestre.
 Incluye:
-- DiseÒo de base de datos relacional
-- InserciÛn de datos de prueba
+- Dise√±o de base de datos relacional
+- Inserci√≥n de datos de prueba
 - Consultas orientadas al negocio
 - Vista para realizar el reporting
-- FunciÛn para mÈtricas reutilizables
+- Funci√≥n para m√©tricas reutilizables
 */
 
 USE master;
@@ -15,7 +15,7 @@ GO
 DROP DATABASE IF EXISTS PirineoEcuestre;
 GO
 
--- 1. CreaciÛn de la base de datos
+-- 1. Creaci√≥n de la base de datos
 
 CREATE DATABASE PirineoEcuestre;
 GO
@@ -23,7 +23,7 @@ GO
 USE PirineoEcuestre;
 GO
 
--- 2. CreaciÛn de las tablas (modelo relacional)
+-- 2. Creaci√≥n de las tablas (modelo relacional)
 
 CREATE TABLE Servicios (
     ServicioID INT IDENTITY(1,1) PRIMARY KEY,
@@ -66,21 +66,21 @@ CREATE TABLE DetallesReservas (
 );
 GO
 
--- 3. InserciÛn de datos (n∫1)
+-- 3. Inserci√≥n de datos (n¬∫1)
 
 -- Insertar servicios
 INSERT INTO Servicios (Nombre, Descripcion, Precio, OcupacionMax)
 VALUES
-('Campamento completo', '7 dÌas con pernocta y pensiÛn completa', 1395.00, 25),
-('Campamento de dÌa', '7 dÌas sin pernocta y sin pensiÛn completa', 980.00, 5),
+('Campamento completo', '7 d√≠as con pernocta y pensi√≥n completa', 1395.00, 25),
+('Campamento de d√≠a', '7 d√≠as sin pernocta y sin pensi√≥n completa', 980.00, 5),
 ('Paseo a caballo', 'Paseo por la naturaleza', 25.00, 100),
-('Paseo a pony', 'Para los m·s peques de la casa', 15.00, 100);
+('Paseo a pony', 'Para los m√°s peques de la casa', 15.00, 100);
 GO
 
 -- Insertar clientes
 INSERT INTO Clientes (Nombre, Email, Telefono, Pais)
 VALUES
-('Anna Martinez', 'annam@gmail.com', '655555555', 'EspaÒa'),
+('Anna Martinez', 'annam@gmail.com', '655555555', 'Espa√±a'),
 ('Laura Fernandez', 'lauram@gmail.com', '655555455', 'Austria'),
 ('Maria Lopez', 'mariam@gmail.com', '655555355', 'Ecuador'),
 ('Paula Gimenez', 'paulam@gmail.com', '655525555', 'Polonia');
@@ -105,11 +105,11 @@ VALUES
 (4, 4, 1, 15.00);
 GO
 
--- InserciÛn de datos (n∫ 2)
+-- Inserci√≥n de datos (n¬∫ 2)
 INSERT INTO Clientes (Nombre, Email, Telefono, Pais)
 VALUES
-('Carla Rodriguez', 'carlosr@gmail.com', '600111111', 'EspaÒa'),
-('Elena Mora', 'elenam@gmail.com', '600222222', 'EspaÒa'),
+('Carla Rodriguez', 'carlosr@gmail.com', '600111111', 'Espa√±a'),
+('Elena Mora', 'elenam@gmail.com', '600222222', 'Espa√±a'),
 ('David Klein', 'davidk@gmail.com', '600333333', 'Alemania'),
 ('Sophie Laurent', 'sophie@gmail.com', '600444444', 'Francia'),
 ('Marco Bianchi', 'marcob@gmail.com', '600555555', 'Italia'),
@@ -137,7 +137,7 @@ GO
 INSERT INTO DetallesReservas (ReservaID, ServicioID, CantidadContratada, PrecioUnidad)
 VALUES
 (5, 1, 1, 1395.00),      -- Campamento completo
-(6, 2, 1, 980.00),       -- Campamento de dÌa
+(6, 2, 1, 980.00),       -- Campamento de d√≠a
 (7, 3, 2, 25.00),        -- 2 paseos a caballo
 (8, 3, 1, 25.00),        -- 1 paseo a caballo
 (9, 1, 1, 1395.00),      -- Campamento completo
@@ -145,12 +145,12 @@ VALUES
 (10, 3, 1, 25.00),       -- Paseo a caballo
 (11, 1, 1, 1395.00),     -- Campamento completo
 (12, 4, 2, 15.00),       -- 2 paseos a pony
-(13, 2, 1, 980.00),      -- Campamento de dÌa
+(13, 2, 1, 980.00),      -- Campamento de d√≠a
 (14, 3, 1, 25.00);       -- Paseo a caballo
 GO
 
 -- 4. Comprobar que todo se ha registrado correctamente. Consulta que une las 
--- tablas mediante sus claves primarias y for·neas para mostrar la informaciÛn completa.î
+-- tablas mediante sus claves primarias y for√°neas para mostrar la informaci√≥n completa.‚Äù
 
 SELECT
     c.Nombre AS Cliente,
@@ -177,7 +177,7 @@ JOIN Servicios s ON dr.ServicioID = s.ServicioID
 GROUP BY s.Nombre
 ORDER BY IngresosTotales DESC;
 
--- Ingresos totales por paÌs
+-- Ingresos totales por pa√≠s
 SELECT 
     c.Pais,
     SUM(dr.CantidadContratada * dr.PrecioUnidad) AS Ingresos
@@ -187,7 +187,7 @@ JOIN DetallesReservas dr ON r.ReservaID = dr.ReservaID
 GROUP BY c.Pais
 ORDER BY Ingresos DESC;
 
--- Vista para an·lisis en Power BI o Excel
+-- Vista para an√°lisis en Power BI o Excel
 CREATE VIEW vw_ReservasDetalle AS
 SELECT
     c.Nombre AS Cliente,
@@ -204,7 +204,7 @@ JOIN Servicios s ON dr.ServicioID = s.ServicioID;
 
 SELECT * FROM vw_ReservasDetalle;
 
--- FunciÛn para calcular el numero total de contrataciones realizadas por servicio
+-- Funci√≥n para calcular el numero total de contrataciones realizadas por servicio
 CREATE FUNCTION dbo.TotalContratacionesPorServicio (@ServicioID INT)
 RETURNS INT
 AS
@@ -219,7 +219,7 @@ BEGIN
 END;
 GO
 
--- UtilizaciÛn de la anterior funciÛn
+-- Utilizaci√≥n de la anterior funci√≥n
 SELECT
     s.ServicioID,
     s.Nombre AS Servicio,
@@ -231,4 +231,69 @@ SELECT
     dbo.TotalContratacionesPorServicio(s.ServicioID) AS TotalContrataciones,
     s.OcupacionMax
 FROM Servicios s;
+
+
+-- An√°lisis de ingresos por servicio y su peso porcentual sobre el total
+WITH IngresosPorServicio AS (
+    SELECT
+        s.Nombre AS Servicio,
+        SUM(dr.CantidadContratada * dr.PrecioUnidad) AS Ingresos
+    FROM DetallesReservas dr
+    JOIN Servicios s ON dr.ServicioID = s.ServicioID
+    GROUP BY s.Nombre
+)
+SELECT
+    Servicio,
+    Ingresos,
+    ROUND(Ingresos * 100.0 / SUM(Ingresos) OVER(), 2) AS PorcentajeSobreTotal
+FROM IngresosPorServicio
+ORDER BY Ingresos DESC;
+
+-- Ranking de servicios por ingresos dentro de cada pa√≠s
+SELECT
+    c.Pais,
+    s.Nombre AS Servicio,
+    SUM(dr.CantidadContratada * dr.PrecioUnidad) AS Ingresos,
+    RANK() OVER (
+        PARTITION BY c.Pais 
+        ORDER BY SUM(dr.CantidadContratada * dr.PrecioUnidad) DESC
+    ) AS RankingEnPais
+FROM Clientes c
+JOIN Reservas r ON c.ClienteID = r.ClienteID
+JOIN DetallesReservas dr ON r.ReservaID = dr.ReservaID
+JOIN Servicios s ON dr.ServicioID = s.ServicioID
+GROUP BY c.Pais, s.Nombre
+ORDER BY c.Pais, RankingEnPais;
+
+-- An√°lisis del "ticket medio" por pa√≠s
+SELECT
+    c.Pais,
+    COUNT(DISTINCT r.ReservaID) AS NumeroReservas,
+    ROUND(AVG(r.Total), 2) AS TicketMedio
+FROM Clientes c
+JOIN Reservas r ON c.ClienteID = r.ClienteID
+GROUP BY c.Pais
+ORDER BY TicketMedio DESC;
+
+-- Identificaci√≥n de clientes recurrentes
+SELECT
+    c.Nombre AS Cliente,
+    c.Pais,
+    COUNT(r.ReservaID) AS TotalReservas
+FROM Clientes c
+JOIN Reservas r ON c.ClienteID = r.ClienteID
+GROUP BY c.Nombre, c.Pais
+HAVING COUNT(r.ReservaID) > 1
+ORDER BY TotalReservas DESC;
+
+-- Comparativa entre volumen de contrataci√≥n e ingresos por servicio
+SELECT
+    s.Nombre AS Servicio,
+    SUM(dr.CantidadContratada) AS TotalContrataciones,
+    SUM(dr.CantidadContratada * dr.PrecioUnidad) AS IngresosTotales,
+    RANK() OVER (ORDER BY SUM(dr.CantidadContratada) DESC) AS RankingPorVolumen,
+    RANK() OVER (ORDER BY SUM(dr.CantidadContratada * dr.PrecioUnidad) DESC) AS RankingPorIngresos
+FROM DetallesReservas dr
+JOIN Servicios s ON dr.ServicioID = s.ServicioID
+GROUP BY s.Nombre;
 
